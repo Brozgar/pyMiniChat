@@ -21,7 +21,7 @@ pip install -r requirements.txt
 
 You might also need to install [С++ build tools](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2019)
 
-####To install Telnet
+### To install Telnet
 
 MacOS:
 ```
