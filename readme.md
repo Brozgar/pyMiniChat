@@ -11,6 +11,8 @@ The app includes the following features:
 5. Disconnects in case of attempt to use a taken login (required by the task)
 6. And, of course, all the connected and logged in users can see the messages
 
+This project actually won the competition of the course, but the winner just stole this repo... You can feel free to fork and modify, but please provide the link to this repo if you don't do any or only small changes. Otherwise modify it as you see fit.
+
 ## Installation
 
 Install dependencies
