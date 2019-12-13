@@ -7,9 +7,8 @@
 # A client for the chat, using PyQt 5
 import sys
 
-
 from PyQt5 import QtWidgets
-from twisted.internet.protocol import ClientFactory
+from twisted.internet.protocol import ClientFactory, connectionDone
 from twisted.protocols.basic import LineOnlyReceiver
 
 from gui import design
@@ -24,6 +23,9 @@ class ClientConnectorProtocol(LineOnlyReceiver):
 
     def lineReceived(self, line) -> None:
         self.factory.window.plainTextEdit.appendPlainText(line.decode())
+
+    def connectionLost(self, reason=connectionDone):
+        self.factory.window.close()
 
 
 class ClientConnector(ClientFactory):
@@ -45,22 +47,21 @@ class ChatWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
 
     def init_handlers(self) -> None:
         self.pushButton.clicked.connect(self.send_message)
-        # self.lineEdit.returnPressed.connect(self.pushButton.click)
+        self.lineEdit.returnPressed.connect(self.pushButton.click)
 
     def send_message(self) -> None:
         message = self.lineEdit.text()
         self.protocol.sendLine(message.encode())
-        # self.lineEdit.clear()
-        self.lineEdit.setText('')
+        self.lineEdit.clear()
 
 
 app = QtWidgets.QApplication(sys.argv)
 
-import qt5reactor
 
 chat_window = ChatWindow()
 chat_window.show()
 
+import qt5reactor
 qt5reactor.install()
 
 from twisted.internet import reactor

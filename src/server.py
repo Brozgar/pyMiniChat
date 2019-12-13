@@ -13,17 +13,19 @@ class ServerConnectorProtocol(LineOnlyReceiver):
     factory: 'ServerConnector'
     login: str = None
 
+    def format_message(self, user_name: str, message: str) -> str:
+        return f"Message from {user_name}: {message}"
+
     # When we receive a message/command from a user
     def lineReceived(self, line: bytes) -> None:
         content = line.decode()
 
         if self.login is not None:
-            content = f"Message from {self.login}: {content}"
-            self.store_message(content)
+            self.store_message(self.format_message(self.login, content))
 
-            for user in self.factory.clients:
-                if user is not self:
-                    user.sendLine(content.encode())
+            for client in self.factory.clients:
+                user_name = self.login if client is self else 'you'
+                client.sendLine(self.format_message(user_name, content).encode())
         else:
             self.login_user(content)
 
@@ -54,7 +56,8 @@ class ServerConnectorProtocol(LineOnlyReceiver):
 
         if self.is_login_taken(login):
             self.sendLine(f"Login {login} is already taken. Please specify a different one!".encode())
-            self.transport.loseConnection()
+            # Disconnecting was required by the task, but it's a bad UX
+            # self.transport.loseConnection()
             return
         else:
             self.login = login
