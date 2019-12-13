@@ -11,31 +11,26 @@ The app includes the following features:
 5. Disconnects in case of attempt to use a taken login (required by the task)
 6. And, of course, all the connected and logged in users can see the messages
 
-This project actually won the competition of the course, but the winner just stole this repo... You can feel free to fork and modify, but please provide the link to this repo if you don't do any or only small changes. Otherwise modify it as you see fit.
+This project won the competition of the course! You can feel free to fork and modify, but please provide the link to this repo if you don't do any or only small changes. Otherwise modify it as you see fit.
 
 ## Installation
 
 Install dependencies
 
 ```
-pip install -r requirements.txt
+pipenv install
 ```
 
 You might also need to install [С++ build tools](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2019)
 
-### To install Telnet
+### Issues with pywin32
 
-MacOS:
-```
-brew install telnet
-```
+Installing pywin32 suddenly became an issue, even though it worked on the previous version. If you run into issues with it I would recommend the following (which fixed my issue):
 
-Ubuntu:
-```
-sudo apt-get install telnet
-```
+1. Instead of using requirements.txt I switched to PipFile: [PipFile repo](https://github.com/pypa/pipfile) and [PipFile examples](https://pipenv-fork.readthedocs.io/en/latest/basics.html)
+2. Make sure your environment is set up as shown here: [Instruction for PyCharm](https://www.jetbrains.com/help/pycharm/pipenv.html)
 
-Windows: [instructions](https://help.keenetic.com/hc/ru/articles/213965809-%D0%92%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-%D1%81%D0%BB%D1%83%D0%B6%D0%B1-Telnet-%D0%B8-TFTP-%D0%B2-Windows)
+So, I think, the key was switching to pipeEnv environment and setting up the pipenv executable and PipFile's update seems to do better job with dependencies than just using ```pip install -r requirements.txt``` 
 
 ## Running the app
 
@@ -49,7 +44,7 @@ Run the server script
 python server.py
 ```
 
-Then you can connect with another (or many other) terminal
+Run the client script
 ```
-telnet 127.0.0.1 1234
+python client.py
 ```
