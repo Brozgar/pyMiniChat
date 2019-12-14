@@ -16,7 +16,7 @@ class ServerConnectorProtocol(LineOnlyReceiver):
     login: str = None
 
     def format_message(self, user_name: str, message: str) -> str:
-        timestamp = datetime.datetime.now().strftime("%x %X")
+        timestamp = datetime.datetime.now().strftime("%Y/%m/%d %H:%M")
         return f"[{timestamp}] Message from {user_name}: {message}"
 
     # When we receive a message/command from a user
