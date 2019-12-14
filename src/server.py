@@ -4,6 +4,8 @@
 #
 #  Server for processing incoming messages from clients
 #
+import datetime
+
 from twisted.internet import reactor
 from twisted.internet.protocol import connectionDone, ServerFactory
 from twisted.protocols.basic import LineOnlyReceiver
@@ -14,7 +16,8 @@ class ServerConnectorProtocol(LineOnlyReceiver):
     login: str = None
 
     def format_message(self, user_name: str, message: str) -> str:
-        return f"Message from {user_name}: {message}"
+        timestamp = datetime.datetime.now().strftime("%x %X")
+        return f"[{timestamp}] Message from {user_name}: {message}"
 
     # When we receive a message/command from a user
     def lineReceived(self, line: bytes) -> None:
