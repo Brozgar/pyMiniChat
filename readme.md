@@ -8,7 +8,7 @@ The app includes the following features:
 2. User authorization by login (should be unique), done by sending a message "login:YOUR_LOGIN"
 3. Retrieving last 10 messages for new successful authorizations
 4. Showing the list of already logged in users, so the user can see which names are already taken
-5. Disconnects in case of attempt to use a taken login (required by the task)
+5. A GUI window to use the chat
 6. And, of course, all the connected and logged in users can see the messages
 
 This project won the competition of the course! You can feel free to fork and modify, but please provide the link to this repo if you don't do any or only small changes. Otherwise modify it as you see fit.
