@@ -18,7 +18,7 @@ PyQt5-sip = '~=12.7.0'
 PyQt5-stubs = '~=5.13.1.3'
 qt5reactor = '~=0.5'
 six = '~=1.13.0'
-Twisted = '~=19.10.0'
+Twisted = '~=21.2.0'
 zope = {interface = '~=4.7.1'}
 pypiwin32 = {version = "*", os_name = "== 'windows'"}
 
